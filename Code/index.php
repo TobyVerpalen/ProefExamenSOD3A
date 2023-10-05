@@ -19,7 +19,7 @@ echo "Welcome!";
     <h2>Home</h2>
     <p>Hello, you are logged in.</p>
     <ul>
-        <li><a href="kandidaat.php">kandidaat</a></li>
+        <li><a href="vote.php">Stemmen</a></li>
         <li><a href="reset_password.php">Reset password</a></li>
         <li><a href="logout.php">Log out</a></li>
     </ul>
