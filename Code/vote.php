@@ -23,6 +23,7 @@ class VotingPage {
             echo "Je hebt al gestemd.";
             echo "<p><a href='index.php'>Startpagina</a></p>";
             echo "<p><a href='index.php'>Log out</a></p>";
+            echo "<p><a href='results.php'>Verkiezing resultaten</a></p>";
             return; // Exit early, preventing the user from voting again
         }
 
