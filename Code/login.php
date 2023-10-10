@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'Database.php';
-require_once 'User.php';
+require_once 'classes/classUser.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -27,6 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Gebruikersnaam: <input type='text' name='username' required><br><br>";
     echo "Wachtwoord: <input type='password' name='password' required><br><br>";
     echo "<button type='submit'>Inloggen</button>";
-    echo "<p><a href='register.php'>Log out</a></p>";
+    echo "<p><a href='register.php'>Registeren</a></p>";
     echo "</form>";
 }

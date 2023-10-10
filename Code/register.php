@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'Database.php';
-require_once 'User.php';
+require_once 'classes/classUser.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = new Database();
