@@ -23,8 +23,27 @@ class ResultsPage {
 
         $result = $conn->query($sqlElectionResults);
 
+        // Start de HTML-uitvoer
+        echo "<!DOCTYPE html>";
+        echo "<html>";
+        echo "<head>";
+        echo "<title>Verkiezingsresultaten</title>";
+        echo "<link rel='stylesheet' href='css/index.css'>";
+        echo "</head>";
+        echo "<body>";
+
+        // Navigatiebalk
+        echo "<nav>";
+        echo "<ul>";
+        echo "<li><a href='index.php'>Startpagina</a></li>";
+        echo "<li><a href='logout.php'>Log out</a></li>";
+        echo "</ul>";
+        echo "</nav>";
+
+        // Verkiezingsresultaten weergeven
+        echo "<h2>Verkiezingsresultaten:</h2>";
+
         if ($result->rowCount() > 0) {
-            echo "<h2>Verkiezingsresultaten:</h2>";
             echo "<table>";
             echo "<tr><th>Partij</th><th>Totaal aantal stemmen</th></tr>";
 
@@ -40,7 +59,9 @@ class ResultsPage {
             echo "Geen verkiezingsresultaten gevonden.";
         }
 
-        echo "<p><a href='index.php'>Startpagina</a></p>";
-        echo "<p><a href='logout.php'>Log out</a></p>";
+        // Sluit de HTML-uitvoer
+        echo "</body>";
+        echo "</html>";
     }
 }
+?>
