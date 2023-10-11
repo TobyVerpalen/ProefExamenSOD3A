@@ -20,8 +20,26 @@ class PartiesPage {
 
         $result = $conn->query($sqlPartyInfo);
 
+        // Start de HTML-uitvoer
+        echo "<!DOCTYPE html>";
+        echo "<html>";
+        echo "<head>";
+        echo "<title>Politieke Partijen</title>";
+        echo "<link rel='stylesheet' href='css/index.css'>";
+        echo "</head>";
+        echo "<body>";
+
+        // Navigatiebalk
+        echo "<nav>";
+        echo "<ul>";
+        echo "<li><a href='index.php'>Startpagina</a></li>";
+        echo "<li><a href='logout.php'>Log out</a></li>";
+        echo "</ul>";
+        echo "</nav>";
+
         if ($result->rowCount() > 0) {
             echo "<h2>Informatie over politieke partijen:</h2>";
+            echo "<br>";
 
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 $partyName = $row['party_name'];
@@ -38,7 +56,9 @@ class PartiesPage {
             echo "Geen informatie over politieke partijen gevonden.";
         }
 
-        echo "<p><a href='index.php'>Startpagina</a></p>";
-        echo "<p><a href='logout.php'>Log out</a></p>";
+        // Sluit de HTML-uitvoer
+        echo "</body>";
+        echo "</html>";
     }
 }
+?>

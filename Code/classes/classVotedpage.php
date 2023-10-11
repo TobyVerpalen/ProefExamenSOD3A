@@ -24,6 +24,23 @@ class VotedPage {
             $stmt->bindParam(':candidate_id', $selectedCandidateId, PDO::PARAM_INT);
             $stmt->execute();
 
+            // Start de HTML-uitvoer
+            echo "<!DOCTYPE html>";
+            echo "<html>";
+            echo "<head>";
+            echo "<title>Uw stem</title>";
+            echo "<link rel='stylesheet' href='css/index.css'>";
+            echo "</head>";
+            echo "<body>";
+
+            // Navigatiebalk
+            echo "<nav>";
+            echo "<ul>";
+            echo "<li><a href='index.php'>Startpagina</a></li>";
+            echo "<li><a href='logout.php'>Log out</a></li>";
+            echo "</ul>";
+            echo "</nav>";
+
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $itemName = $row['name'];
@@ -35,10 +52,13 @@ class VotedPage {
             } else {
                 echo "Geselecteerde kandidaat niet gevonden.";
             }
+
+            // Sluit de HTML-uitvoer
+            echo "</body>";
+            echo "</html>";
         } else {
             echo "Geen steminformatie gevonden.";
         }
-        echo "<p><a href='index.php'>Startpagina</a></p>";
-        echo "<p><a href='logout.php'>Log out</a></p>";
     }
 }
+?>

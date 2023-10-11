@@ -17,50 +17,78 @@ class VotingPage {
 
         // Check if the user has already voted
         if ($this->hasUserVoted($_SESSION['user_id'])) {
+            // Start de HTML-uitvoer
+            echo "<!DOCTYPE html>";
+            echo "<html>";
+            echo "<head>";
+            echo "<title>Stemmen</title>";
+            echo "<link rel='stylesheet' href='css/index.css'>";
+            echo "</head>";
+            echo "<body>";
+
+            // Navigatiebalk
+            echo "<nav>";
+            echo "<ul>";
+            echo "<li><a href='index.php'>Startpagina</a></li>";
+            echo "<li><a href='logout.php'>Log out</a></li>";
+            echo "<li><a href='results.php'>Verkiezing resultaten</a></li>";
+            echo "</ul>";
+            echo "</nav>";
+
             echo "Je hebt al gestemd.";
-            echo "<p><a href='index.php'>Startpagina</a></p>";
-            echo "<p><a href='index.php'>Log out</a></p>";
-            echo "<p><a href='results.php'>Verkiezing resultaten</a></p>";
+
+            // Sluit de HTML-uitvoer
+            echo "</body>";
+            echo "</html>";
+
             return; // Exit early, preventing the user from voting again
         }
 
-        // Check if the form has been submitted
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['candidate_id'])) {
-                $candidateId = $_POST['candidate_id'];
-                $this->recordVote($_SESSION['user_id'], $candidateId);
-                // Optionally, you can display a confirmation message here.
-                header('Location: voted.php'); // Redirect to the voted.php page after voting
-                exit;
-            }
-        }
-
         // Display the list of candidates
+        // Start de HTML-uitvoer
+        echo "<!DOCTYPE html>";
+        echo "<html>";
+        echo "<head>";
+        echo "<title>Stemmen</title>";
+        echo "<link rel='stylesheet' href='css/index.css'>";
+        echo "</head>";
+        echo "<body>";
+
+        // Navigatiebalk
+        echo "<nav>";
+        echo "<ul>";
+        echo "<li><a href='index.php'>Startpagina</a></li>";
+        echo "<li><a href='logout.php'>Log out</a></li>";
+        echo "</ul>";
+        echo "</nav>";
+
+        echo "<h2>Partijleiders</h2>";
+
+        // Haal de lijst van partijleiders op uit de database inclusief de party_name
         $sqlCandidates = "SELECT * FROM party_leaders";
-        $resultCandidates = $conn->query($sqlCandidates);
+        $resultCandidates = $conn->query($sqlCandidates); // Voer de query uit en sla het resultaat op
 
-        if ($resultCandidates->rowCount() > 0) {
-            echo "<h2>Partijleiders</h2>";
-            echo "<form method='POST' action=''>"; // Remove action attribute to submit to the same page
+        echo "<form method='POST' action=''>"; // Remove action attribute to submit to the same page
 
-            while ($row = $resultCandidates->fetch(PDO::FETCH_ASSOC)) {
-                $itemId = $row['id'];
-                $itemName = $row['name'];
-                $partyName = $row['party_name'];
+        while ($row = $resultCandidates->fetch(PDO::FETCH_ASSOC)) {
+            $itemId = $row['id'];
+            $itemName = $row['name'];
+            $partyName = $row['party_name'];
 
-                echo "<label>";
-                echo "<input type='radio' name='candidate_id' value='$itemId'>";
-                echo "$itemName ($partyName)";
-                echo "</label><br>";
-            }
-
-            echo "<button type='submit'>Stem</button>";
-            echo "</form>";
-        } else {
-            echo "Geen partijleiders gevonden.";
+            echo "<label>";
+            echo "<input type='radio' name='candidate_id' value='$itemId'>";
+            echo "$itemName ($partyName)";
+            echo "</label><br>";
         }
+
+        echo "<button type='submit'>Stem</button>";
+        echo "</form>";
 
         echo "<p><a href='logout.php'>Log out</a></p>";
+
+        // Sluit de HTML-uitvoer
+        echo "</body>";
+        echo "</html>";
     }
 
     // Check if the user has already voted
@@ -93,3 +121,4 @@ class VotingPage {
         $_SESSION['selected_candidate_id'] = $candidateId;
     }
 }
+
