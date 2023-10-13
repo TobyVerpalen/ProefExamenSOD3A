@@ -81,8 +81,15 @@ class VotingPage {
             echo "</label><br>";
         }
 
-        echo "<button type='submit'>Stem</button>";
+        echo "<button type='submit' name='submit'>Stem</button>";
         echo "</form>";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+            $selectedCandidateId = $_POST['candidate_id'];
+            $this->recordVote($_SESSION['user_id'], $selectedCandidateId);
+            header('Location: voted.php');
+            exit;
+        }
 
         echo "<p><a href='logout.php'>Log out</a></p>";
 
@@ -121,4 +128,4 @@ class VotingPage {
         $_SESSION['selected_candidate_id'] = $candidateId;
     }
 }
-
+?>
